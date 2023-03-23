@@ -70,4 +70,12 @@ public interface UserService {
    */
   boolean existEmail(String email);
 
+  /**
+   * Method to validate if a role exist
+   * 
+   * @param id
+   * @return
+   */
+  boolean existRole(Integer id);
+
 }

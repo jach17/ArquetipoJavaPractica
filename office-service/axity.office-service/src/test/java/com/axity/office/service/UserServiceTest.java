@@ -229,6 +229,33 @@ class UserServiceTest {
     assertEquals(ErrorCode.EMAIL_ALREADY_EXISTS.getCode(), response.getHeader().getCode());
   }
 
+  /***** ESCENARIO CUATRO *****/
+
+  /**
+   * Test method for validate if role selected does not exist
+   * {@link com.axity.office.service.impl.UserServiceImpl#create(com.axity.office.commons.dto.UserDto)}.
+   */
+  @Test
+  void testValidateRolesSelectedNotExist() {
+    // Data inicial
+    var list = new ArrayList<RoleDto>();
+    list.add(createRole(99)); // Role selected does not exist in db
+
+    var dto = new UserDto();
+    dto.setUsername("JonathanDev");
+    dto.setEmail("jonathan.dev@axity.com");
+    dto.setName("Jonathan");
+    dto.setLastName("Aldana");
+    dto.setRoles(list);
+
+    // Llamada
+    var response = this.userService.create(dto);
+
+    // Validación
+    assertNotNull(response);
+    assertEquals(ErrorCode.ROLE_NOT_FOUND.getCode(), response.getHeader().getCode());
+  }
+
   /**
    * Method to validate update
    */
