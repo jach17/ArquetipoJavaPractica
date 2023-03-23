@@ -1,0 +1,16 @@
+{
+  "name": "generator-jdk11-springboot",
+  "version": "1.0.0",
+  "description": "Proyecto generador de Spring Boot + jdk11",
+  "files": [
+    "generators"
+  ],
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "dependencies": {
+    "yeoman-generator": "^5.8.0"
+  },
+  "author": "Guillermo Segura Olivera",
+  "license": "MIT"
+}

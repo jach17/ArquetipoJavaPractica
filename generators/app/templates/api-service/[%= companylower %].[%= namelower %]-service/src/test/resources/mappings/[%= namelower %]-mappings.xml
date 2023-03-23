@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozermapper.github.io/schema/bean-mapping"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://dozermapper.github.io/schema/bean-mapping http://dozermapper.github.io/schema/bean-mapping.xsd">
+  [% controllers.forEach(function(controller) { %]
+  <mapping>
+    <class-a>com.[%= companylower %].[%= namelower %].commons.dto.[%= controller.nameCamel %]Dto</class-a>
+    <class-b>com.[%= companylower %].[%= namelower %].model.[%= controller.entity %]DO</class-b>
+    [% controller.properties.forEach(function(property) { %]<field>
+      <a>[%= property.nameCamel%]</a>
+      <b>[%= property.nameCamel%]</b>
+    </field>[% }); %]
+  </mapping>[% });%]
+</mappings>
