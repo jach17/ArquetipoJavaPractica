@@ -111,6 +111,25 @@ public class UserServiceImpl implements UserService {
 
       return genericResponse;
     }
+
+    if (dto.getRoles() == null) {
+      GenericResponseDto<UserDto> genericResponse = new GenericResponseDto<>();
+
+      genericResponse
+          .setHeader(new HeaderDto(ErrorCode.NOT_ROLE_SELECTED.getCode(), "Error. You must select at least one rol."));
+
+      return genericResponse;
+    }
+
+    if (isRolesEmpty(dto.getRoles())) {
+      GenericResponseDto<UserDto> genericResponse = new GenericResponseDto<>();
+
+      genericResponse
+          .setHeader(new HeaderDto(ErrorCode.NOT_ROLE_SELECTED.getCode(), "Error. You must select at least one rol."));
+
+      return genericResponse;
+    }
+
     var rolesSelected = dto.getRoles();
 
     for (RoleDto role : rolesSelected) {
@@ -138,6 +157,15 @@ public class UserServiceImpl implements UserService {
     this.userPersistence.save(entity);
     dto.setId(entity.getId());
     return new GenericResponseDto<>(dto);
+  }
+
+  /**
+   * 
+   * @param username
+   */
+  @Override
+  public boolean isRolesEmpty(List<RoleDto> roles) {
+    return roles.isEmpty();
   }
 
   /**

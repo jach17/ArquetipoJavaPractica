@@ -2,6 +2,7 @@ package com.axity.office.service;
 
 import java.util.List;
 
+import com.axity.office.commons.dto.RoleDto;
 import com.axity.office.commons.dto.UserDto;
 import com.axity.office.commons.request.PaginatedRequestDto;
 import com.axity.office.commons.response.GenericResponseDto;
@@ -77,5 +78,13 @@ public interface UserService {
    * @return
    */
   boolean existRole(Integer id);
+
+  /**
+   * Method to validate if a role exist
+   * 
+   * @param id
+   * @return
+   */
+  boolean isRolesEmpty(List<RoleDto> roles);
 
 }
