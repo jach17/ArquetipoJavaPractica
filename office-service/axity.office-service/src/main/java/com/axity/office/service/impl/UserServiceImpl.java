@@ -19,6 +19,7 @@ import com.axity.office.commons.exception.BusinessException;
 import com.axity.office.commons.request.MessageDto;
 import com.axity.office.commons.request.PaginatedRequestDto;
 import com.axity.office.commons.response.GenericResponseDto;
+import com.axity.office.commons.response.HeaderDto;
 import com.axity.office.commons.response.PaginatedResponseDto;
 import com.axity.office.model.UserDO;
 import com.axity.office.model.QUserDO;
@@ -92,6 +93,24 @@ public class UserServiceImpl implements UserService {
   @Override
   public GenericResponseDto<UserDto> create(UserDto dto) {
 
+    if (existUsername(dto.getUsername())) {
+      GenericResponseDto<UserDto> genericResponse = new GenericResponseDto<>();
+
+      genericResponse
+          .setHeader(new HeaderDto(ErrorCode.USERNAME_ALREADY_EXISTS.getCode(), "Error. Username already exist."));
+
+      return genericResponse;
+    }
+
+    if (existEmail(dto.getEmail())) {
+      GenericResponseDto<UserDto> genericResponse = new GenericResponseDto<>();
+
+      genericResponse
+          .setHeader(new HeaderDto(ErrorCode.EMAIL_ALREADY_EXISTS.getCode(), "Error. Email already exist."));
+
+      return genericResponse;
+    }
+
     UserDO entity = new UserDO();
     this.mapper.map(dto, entity);
     entity.setId(null);
@@ -106,6 +125,24 @@ public class UserServiceImpl implements UserService {
     this.userPersistence.save(entity);
     dto.setId(entity.getId());
     return new GenericResponseDto<>(dto);
+  }
+
+  /**
+   * 
+   * @param email
+   */
+  @Override
+  public boolean existEmail(String email) {
+    return (this.userPersistence.findByEmail(email).isPresent());
+  }
+
+  /**
+   * 
+   * @param username
+   */
+  @Override
+  public boolean existUsername(String username) {
+    return (this.userPersistence.findByUsername(username).isPresent());
   }
 
   /**

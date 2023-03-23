@@ -177,6 +177,58 @@ class UserServiceTest {
     this.userService.delete(dto.getId());
   }
 
+  /***** ESCENARIO DOS Y TRES *****/
+
+  /**
+   * Test method for validate username already exist in bd
+   * {@link com.axity.office.service.impl.UserServiceImpl#create(com.axity.office.commons.dto.UserDto)}.
+   */
+  @Test
+  void testValidateUsernameAlreadyExist() {
+    // Data inicial
+    var list = new ArrayList<RoleDto>();
+    list.add(createRole(1));
+
+    var dto = new UserDto();
+    dto.setUsername("denise.alford"); // Username alreadyexist in db
+    dto.setEmail("jonathan.dev@axity.com");
+    dto.setName("Jonathan");
+    dto.setLastName("Aldana");
+    dto.setRoles(list);
+
+    // Llamada
+    var response = this.userService.create(dto);
+
+    // Validación
+    assertNotNull(response);
+    assertEquals(ErrorCode.USERNAME_ALREADY_EXISTS.getCode(), response.getHeader().getCode());
+  }
+
+  /**
+   * Test method for validate email already exist in bd
+   * {@link com.axity.office.service.impl.UserServiceImpl#create(com.axity.office.commons.dto.UserDto)}.
+   */
+  @Test
+  void testValidateEmailAlreadyExist() {
+    // Data inicial
+    var list = new ArrayList<RoleDto>();
+    list.add(createRole(1));
+
+    var dto = new UserDto();
+    dto.setUsername("JonathanDev");
+    dto.setEmail("denise.alford@company.net"); // Email alreadyexist in db
+    dto.setName("Jonathan");
+    dto.setLastName("Aldana");
+    dto.setRoles(list);
+
+    // Llamada
+    var response = this.userService.create(dto);
+
+    // Validación
+    assertNotNull(response);
+    assertEquals(ErrorCode.EMAIL_ALREADY_EXISTS.getCode(), response.getHeader().getCode());
+  }
+
   /**
    * Method to validate update
    */
