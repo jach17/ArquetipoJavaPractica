@@ -117,6 +117,66 @@ class UserServiceTest {
     this.userService.delete(dto.getId());
   }
 
+  /***** ESCENARIO UNO *****/
+
+  /**
+   * Test method for create user with one role
+   * {@link com.axity.office.service.impl.UserServiceImpl#create(com.axity.office.commons.dto.UserDto)}.
+   */
+  @Test
+  void testCreateWithOneRole() {
+    // Data inicial
+    var list = new ArrayList<RoleDto>();
+    list.add(createRole(1));
+
+    var dto = new UserDto();
+    dto.setUsername("JonathanDev");
+    dto.setEmail("jonathan.dev@axity.com");
+    dto.setName("Jonathan");
+    dto.setLastName("Aldana");
+    dto.setRoles(list);
+
+    // Llamada
+    var response = this.userService.create(dto);
+
+    // Validación
+    assertNotNull(response);
+    assertEquals("OK", response.getHeader().getMessage());
+    assertNotNull(response.getBody());
+
+    this.userService.delete(dto.getId());
+  }
+
+  /**
+   * Test method for create user with many roles
+   * {@link com.axity.office.service.impl.UserServiceImpl#create(com.axity.office.commons.dto.UserDto)}.
+   */
+  @Test
+  void testCreateWithManyRole() {
+    // Data inicial
+    var list = new ArrayList<RoleDto>();
+    list.add(createRole(1));
+    list.add(createRole(2));
+    list.add(createRole(3));
+
+    var dto = new UserDto();
+    dto.setUsername("JonathanDev");
+    dto.setEmail("jonathan.dev@axity.com");
+    dto.setName("Jonathan");
+    dto.setLastName("Aldana");
+    dto.setRoles(list);
+
+    // Llamada
+    var response = this.userService.create(dto);
+
+    // Validación
+    assertNotNull(response);
+    assertEquals("OK", response.getHeader().getMessage());
+    assertNotNull(response.getBody());
+
+    this.userService.delete(dto.getId());
+  }
+
   /**
    * Method to validate update
    */
