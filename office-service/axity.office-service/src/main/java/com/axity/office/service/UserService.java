@@ -55,36 +55,4 @@ public interface UserService {
    */
   GenericResponseDto<Boolean> delete(Integer id);
 
-  /**
-   * Method to validate if a username already exist
-   * 
-   * @param username
-   * @return
-   */
-  boolean existUsername(String username);
-
-  /**
-   * Method to validate if a username already exist
-   * 
-   * @param email
-   * @return
-   */
-  boolean existEmail(String email);
-
-  /**
-   * Method to validate if a role exist
-   * 
-   * @param id
-   * @return
-   */
-  boolean existRole(Integer id);
-
-  /**
-   * Method to validate if a role exist
-   * 
-   * @param id
-   * @return
-   */
-  boolean isRolesEmpty(List<RoleDto> roles);
-
 }

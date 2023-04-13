@@ -88,67 +88,40 @@ public class UserServiceImpl implements UserService {
     return response;
   }
 
+  private GenericResponseDto<UserDto> getGenericResponse(int error, String message) {
+    GenericResponseDto<UserDto> genericResponse = new GenericResponseDto<>();
+    genericResponse.setHeader(new HeaderDto(error, message));
+    return genericResponse;
+  }
+
   /**
    * {@inheritDoc}
    */
   @Override
   public GenericResponseDto<UserDto> create(UserDto dto) {
-    GenericResponseDto<UserDto> genericResponse = new GenericResponseDto<>();
     if (existUsername(dto.getUsername())) {
-
-      genericResponse
-          .setHeader(new HeaderDto(ErrorCode.USERNAME_ALREADY_EXISTS.getCode(), "Error. Username already exist."));
-
-      return genericResponse;
+      return getGenericResponse(ErrorCode.USERNAME_ALREADY_EXISTS.getCode(), "Error. Username already exist.");
     }
 
     if (existEmail(dto.getEmail())) {
-
-      genericResponse
-          .setHeader(new HeaderDto(ErrorCode.EMAIL_ALREADY_EXISTS.getCode(), "Error. Email already exist."));
-
-      return genericResponse;
+      return getGenericResponse(ErrorCode.EMAIL_ALREADY_EXISTS.getCode(), "Error. Email already exist.");
     }
 
     if (dto.getRoles() == null) {
-
-      genericResponse
-          .setHeader(new HeaderDto(ErrorCode.NOT_ROLE_SELECTED.getCode(), "Error. You must select at least one rol."));
-
-      return genericResponse;
+      return getGenericResponse(ErrorCode.NOT_ROLE_SELECTED.getCode(), "Error. You must select at least one rol.");
     }
 
     if (isRolesEmpty(dto.getRoles())) {
-
-      genericResponse
-          .setHeader(new HeaderDto(ErrorCode.NOT_ROLE_SELECTED.getCode(), "Error. You must select at least one rol."));
-
-      return genericResponse;
+      return getGenericResponse(ErrorCode.NOT_ROLE_SELECTED.getCode(), "Error. You must select at least one rol.");
     }
 
-    var rolesSelected = dto.getRoles();
-
-    for (RoleDto role : rolesSelected) {
-      if (!existRole(role.getId())) {
-
-        genericResponse
-            .setHeader(new HeaderDto(ErrorCode.ROLE_NOT_FOUND.getCode(), "Error. Role selected does not exist."));
-
-        return genericResponse;
-      }
-    }
     boolean roleNotExist = dto.getRoles().stream()
         .filter(role -> !existRole(role.getId()))
-        .peek(role -> {
-
-          genericResponse
-              .setHeader(new HeaderDto(ErrorCode.ROLE_NOT_FOUND.getCode(), "Error. Role selected does not exist."));
-        })
         .findAny()
         .isPresent();
 
     if (roleNotExist) {
-      return genericResponse;
+      return getGenericResponse(ErrorCode.ROLE_NOT_FOUND.getCode(), "Error. Role selected does not exist.");
     }
 
     UserDO entity = new UserDO();
@@ -171,8 +144,7 @@ public class UserServiceImpl implements UserService {
    * 
    * @param username
    */
-  @Override
-  public boolean isRolesEmpty(List<RoleDto> roles) {
+  private boolean isRolesEmpty(List<RoleDto> roles) {
     return roles.isEmpty();
   }
 
@@ -180,8 +152,7 @@ public class UserServiceImpl implements UserService {
    * 
    * @param email
    */
-  @Override
-  public boolean existEmail(String email) {
+  private boolean existEmail(String email) {
     return (this.userPersistence.findByEmail(email).isPresent());
   }
 
@@ -189,8 +160,7 @@ public class UserServiceImpl implements UserService {
    * 
    * @param username
    */
-  @Override
-  public boolean existUsername(String username) {
+  private boolean existUsername(String username) {
     return (this.userPersistence.findByUsername(username).isPresent());
   }
 
@@ -198,8 +168,7 @@ public class UserServiceImpl implements UserService {
    * 
    * @param id
    */
-  @Override
-  public boolean existRole(Integer id) {
+  private boolean existRole(Integer id) {
     return this.rolePersistence.findById(id).isPresent();
   }
 
