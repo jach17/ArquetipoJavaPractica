@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry excluding="controller/|handler/" kind="src" path="generators/app/templates/api-service/[%= companylower %].[%= namelower %]-api/src/main/java/com/[%= companylower %]/[%= namelower %]"/>
+	<classpathentry kind="src" path="generators/app/templates/api-service/[%= companylower %].[%= namelower %]-api/src/main/java/com/[%= companylower %]/[%= namelower %]/controller"/>
+	<classpathentry kind="src" path="generators/app/templates/api-service/[%= companylower %].[%= namelower %]-api/src/main/java/com/[%= companylower %]/[%= namelower %]/handler"/>
+	<classpathentry excluding="dto/" kind="src" path="generators/app/templates/api-service/[%= companylower %].[%= namelower %]-api/src/test/java/com/[%= companylower %]/[%= namelower %]"/>
+	<classpathentry kind="src" path="generators/app/templates/api-service/[%= companylower %].[%= namelower %]-api/src/test/java/com/[%= companylower %]/[%= namelower %]/dto"/>
+	<classpathentry kind="src" path="generators/app/templates/api-service/[%= companylower %].[%= namelower %]-commons/src/main/java/com/[%= companylower %]/[%= namelower %]/commons/aspectj"/>
+	<classpathentry kind="src" path="generators/app/templates/api-service/[%= companylower %].[%= namelower %]-commons/src/main/java/com/[%= companylower %]/[%= namelower %]/commons/enums"/>
+	<classpathentry kind="src" path="generators/app/templates/api-service/[%= companylower %].[%= namelower %]-commons/src/main/java/com/[%= companylower %]/[%= namelower %]/commons/exception"/>
+	<classpathentry kind="src" path="generators/app/templates/api-service/[%= companylower %].[%= namelower %]-commons/src/main/java/com/[%= companylower %]/[%= namelower %]/commons/request"/>
+	<classpathentry kind="src" path="generators/app/templates/api-service/[%= companylower %].[%= namelower %]-commons/src/main/java/com/[%= companylower %]/[%= namelower %]/commons/response"/>
+	<classpathentry kind="src" path="generators/app/templates/api-service/[%= companylower %].[%= namelower %]-commons/src/main/java/com/[%= companylower %]/[%= namelower %]/commons/util"/>
+	<classpathentry kind="src" path="generators/app/templates/api-service/[%= companylower %].[%= namelower %]-facade/src/test/java/com/[%= companylower %]/[%= namelower %]"/>
+	<classpathentry kind="src" path="generators/app/templates/api-service/[%= companylower %].[%= namelower %]-service/src/main/java/com/[%= companylower %]/[%= namelower %]/service/util"/>
+	<classpathentry kind="src" path="generators/app/templates/api-service/[%= companylower %].[%= namelower %]-service/src/test/java/com/[%= companylower %]/[%= namelower %]"/>
+	<classpathentry kind="src" path="generators/app/templates/controllers"/>
+	<classpathentry kind="src" path="generators/app/templates/dto"/>
+	<classpathentry kind="src" path="generators/app/templates/facade"/>
+	<classpathentry kind="src" path="generators/app/templates/model"/>
+	<classpathentry kind="src" path="generators/app/templates/persistence"/>
+	<classpathentry kind="src" path="generators/app/templates/service"/>
+	<classpathentry kind="src" path="office-service/axity.office-api/src/main/java"/>
+	<classpathentry kind="src" path="office-service/axity.office-api/src/test/java"/>
+	<classpathentry kind="src" path="office-service/axity.office-commons/src/main/java"/>
+	<classpathentry kind="src" path="office-service/axity.office-facade/src/main/java"/>
+	<classpathentry kind="src" path="office-service/axity.office-facade/src/test/java"/>
+	<classpathentry kind="src" path="office-service/axity.office-model/src/main/java"/>
+	<classpathentry kind="src" path="office-service/axity.office-model/target/generated-sources/java"/>
+	<classpathentry kind="src" path="office-service/axity.office-persistence/src/main/java"/>
+	<classpathentry kind="src" path="office-service/axity.office-service/src/main/java"/>
+	<classpathentry kind="src" path="office-service/axity.office-service/src/test/java"/>
+	<classpathentry kind="output" path="office-service/axity.office-api/target/classes"/>
+</classpath>
